@@ -1,0 +1,19 @@
+services:
+  litespeed-default:
+    image: litespeedtech/openlitespeed:1.8.5-lsphp85
+    ports:
+      - 8081:8088
+  litespeed-stderr:
+    build:
+      context: .
+      target: stderr
+    ports:
+      - 8082:8088
+    entrypoint: /usr/local/lsws/bin/openlitespeed -d
+  litespeed-dev-stderr:
+    build:
+      context: .
+      target: dev-stderr
+    ports:
+      - 8083:8088
+    entrypoint: /usr/local/lsws/bin/openlitespeed -d

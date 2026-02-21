@@ -1,19 +1,40 @@
 services:
   litespeed-default:
-    image: litespeedtech/openlitespeed:1.8.5-lsphp85
+    build:
+      context: .
+      target: base
     ports:
       - 8081:8088
+
+# uncomment this to debug config files
+#    entrypoint:
+#      - head
+#      - -n200
+#      - /usr/local/lsws/conf/vhosts/Example/vhconf.conf
+#      - /usr/local/lsws/conf/httpd_config.conf
   litespeed-stderr:
     build:
       context: .
       target: stderr
     ports:
       - 8082:8088
-    entrypoint: /usr/local/lsws/bin/openlitespeed -d
-  litespeed-dev-stderr:
+    # uncomment this to debug config files
+    #    entrypoint:
+    #      - head
+    #      - -n200
+    #      - /usr/local/lsws/conf/vhosts/Example/vhconf.conf
+    #      - /usr/local/lsws/conf/httpd_config.conf
+
+  litespeed-stdout:
     build:
       context: .
-      target: dev-stderr
+      target: stdout
     ports:
       - 8083:8088
-    entrypoint: /usr/local/lsws/bin/openlitespeed -d
+
+# uncomment this to debug config files
+#    entrypoint:
+#      - head
+#      - -n200
+#      - /usr/local/lsws/conf/vhosts/Example/vhconf.conf
+#      - /usr/local/lsws/conf/httpd_config.conf
